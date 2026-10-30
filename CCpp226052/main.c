@@ -3,68 +3,33 @@
 #include <math.h>
 void main()
 {
-	int diem = 7.5;
+	//vd: in bảng cửu chương 
+	
+	for (int i = 0; i <= 10; i++)
+	{
+		printf("2 x %d = %d \n", i, 2*i);
+		
+	}
+	// yc: in bảng cửu chương từ bảng cửu chương 2 đến bảng cửu chương 9
 
-	if (diem > 10)
-	{
-		printf("diem khong hop le \n");
-	}
-	else if (diem >=8)
-	{
-		printf("loai gioi \n");
-	}
-	else if (diem >= 6.5)
-	{
-		printf("loai kha \n");
-	}
-	else if (diem >= 5)
-	{
-		printf("loai trung binh \n");
-	}
-	else
-	{
-		printf("loai yeu \n");
+	for (int i = 2;i <= 9;i++) {
+		printf("\nBang cuu chuong %d \n", i);
+		if (i == 4) continue;
+
+		for (int j = 1; j <= 10; j++) {
+			printf("%d x %d = %d \n", i, j, i * j);
+		}
 	}
 
-	// Bài 1
-	// viết chương trình giải pt bậc 2: ax^2 + bx + c = 0 
-	// với a,b,c là số nguyên nhập từ bàn phím
-	// tính delta = b^2 - 4ac
-	// nếu delta > 0 thì pt có 2 nghiem x1 = (-b+sqrt(delta))/2a, x2 = (-b-sqrt(delta))/2a
-	// nếu delta = 0 thì pt có 1 nghiem kep x1 = x2 = -b / 2a
-	// nếu delta < 0 thì pt vô nghiệm
-	// cần #include <math.h>
-	int a = 0;
-	int b = 0;
-	int c = 0;
-
-	int delta = 0;
-
-	printf("chuong trinh giai phuong trinh bac 2 ax^2+bx+c = 0 \n");
-	printf("Nhap a: "); scanf("%d", &a);
-	printf("Nhap b: "); scanf("%d", &b);
-	printf("Nhap c: "); scanf("%d", &c);
-
-	delta = b * b - 4 * a * c;
-
-	if (delta > 0)
+	// yc: yêu cầu người dùng nhập từ bàn phím số tự nhiên n
+	// tính và in ra giai thừa của n (n!)
+	int n = 0;
+	printf("Nhap n: "); scanf("%d", &n);
+	
+	int gt = 1;
+	for (int i = 1; i <= n; i++)
 	{
-		float x1 = (-b + sqrt(delta)) / (2 * a);
-		float x2 = (-b - sqrt(delta)) / (2 * a);
-		printf("pt co 2 nghiem phan biet x1 = %.2f, x2 = %.2f \n", x1, x2);
+		gt = gt * i; // 1*1*2*3*4...*n
 	}
-	else if (delta == 0)
-	{
-		float x = -b / (2.0 * a) ;
-		printf("pt co 1 nghiem kep x1 = x2 = %.2f \n", x);
-	}
-	else
-	{
-		printf("pt vo nghiem \n");
-	}
-
-
-
-
-
+	printf("%d! = %d \n", n, gt);
 }

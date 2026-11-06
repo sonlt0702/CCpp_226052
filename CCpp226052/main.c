@@ -1,135 +1,110 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <math.h>
+#include <stdlib.h>
+#include <time.h>
 void main()
 {
-	//Bài 4. Nhập vào ba số nguyên a, b, c. Tìm số lớn nhất trong ba số.
-	int a = 0;
-	int b = 0;
-	int c = 0;
-
-	printf("Nhap a: "); scanf("%d", &a);
-	printf("Nhap b: "); scanf("%d", &b);
-	printf("Nhap c: "); scanf("%d", &c);
-
-	//int max = a > b ? a : b;
-	//max = max > c ? max : c;
-	int max = a;
-	if (b > max) max = b;
-	if (c > max) max = c;
-
-	printf("so lon nhat la: %d \n", max);
-
 	/*
-	Bài 5. Nhập vào chỉ số điện tiêu thụ trong tháng. Tính tiền điện theo quy tắc:
+	# Bài 16: Trò chơi đoán số ⭐
 
-	0–50 kWh: 1.800đ/kWh
-	51–100 kWh: 2.000đ/kWh
-	101–200 kWh: 2.500đ/kWh
-	Trên 200 kWh: 3.000đ/kWh
+	Chương trình sinh ra một số bí mật trong khoảng 0–99. Người dùng liên tục nhập số dự đoán cho đến khi đoán đúng.
+	Sau mỗi lần nhập:
+	Nếu số nhập nhỏ hơn số bí mật → thông báo "Lon hon"
+	Nếu số nhập lớn hơn → thông báo "Nho hon"
+	Nếu đúng → thông báo số lần đoán.
 	*/
 
-	int so_dien = 0;
-	printf("nhap so dien tieu thu trong thang: ");
-	scanf("%d", &so_dien);
-	int tien_dien = 0;
-	if (so_dien <= 50)
+	//srand(time(NULL));
+	//int x = rand() %100;
+	//int n = 0;
+	//int count = 0;
+	//do
+	//{
+	//	printf("nhap so ban doan: ");
+	//	scanf("%d", &n);
+	//	count++;
+	//	if (n > x) printf("Nho hon \n");
+	//	if (x > n) printf("Lon hon \n");
+
+	//} while (n != x);
+
+	//printf("Chuc mung ban da nhap dung so bi mat sau %d lan \n", count);
+
+
+	// Bài tập giả lập cây ATM
+
+	int so_du_atm = 20000000;
+	int mat_khau_sys = 123456;
+
+	int mat_khau_usr = 0;
+
+	int step = 1;
+	int so_tien_rut = 0;
+	int count = 0;
+
+	while (step != 0) 
 	{
-		tien_dien = so_dien * 1800;
+		switch (step)
+		{
+		case 1:
+			printf("Nhap mk: "); scanf("%d", &mat_khau_usr);
+			if (mat_khau_usr == mat_khau_sys) {
+				step = 2;
+			}
+			else
+			{
+				step = 6;
+			}
+			break;
+		case 2:
+			printf("Nhap so tien muon rut: "); scanf("%d", &so_tien_rut);
+			step = 3;
+			break;
+		case 3:
+			if (so_tien_rut > so_du_atm) 
+			{
+				printf("So du cua ATM khong du, hay nhap so tien nho hon! \n");
+				step = 2;
+			}
+			else
+			{ 
+				step = 4;
+			}
+			break;
+		case 4:
+			printf("Ban da rut duoc %d VND \n", so_tien_rut);
+			step = 5;
+			break;
+
+		case 5:
+			printf("ket thuc! \n");
+			step = 0;
+			break;
+		case 6:
+			count++;
+			printf("Ban da nhap sai mat khau! \n");
+			if (count == 4)
+			{
+				printf("Ban da nhap sai qua 3 lan! \n");
+				step = 5;
+				break;
+			}
+			printf("Ban co muon thu lai khong(y/n): ");
+			char tiep_tuc = 0;
+			scanf(" %c", &tiep_tuc);
+			if (tiep_tuc == 'y')
+			{
+				step = 1;
+			}
+			else
+			{
+				step = 5;
+			}
+			break;
+		default:
+			break;
+		}
+		
 	}
-	else if (so_dien <= 100)
-	{
-		tien_dien = 50 * 1800 + (so_dien - 50) * 2000;
-	}
-	else if (so_dien <= 200)
-	{
-		tien_dien = 50 * 1800 + 50 * 2000 + (so_dien - 100) * 2500;
-	}
-	else
-	{
-		tien_dien = 50 * 1800 + 50 * 2000 + 100 * 2500 + (so_dien - 200) * 3000;
-	}
-
-	printf("tien dien thang nay la: %d \n", tien_dien);
-
-	/*
-	* 
-	Bài 6 — Menu bằng switch
-
-	Tạo menu:
-	===== MENU =====
-
-	1. Cong
-	2. Tru
-	3. Nhan
-	4. Chia
-	yêu cầu người dung nhập 2 só a, b
-	sau đó yêu cầu Người dùng nhập lựa chọn và in ra kết quả tương ứng
-	*/
-	printf("====== MENU ====== \n");
-	printf("1. Cong \n2. Tru \n3. Nhan \n4. Chia\n");
-	int a = 0;
-	int b = 0;
-	printf("Nhap a: "); scanf("%d", &a);
-	printf("Nhap b: "); scanf("%d", &b);
-	int menu = 0;
-	printf("Nhap lua chon phep tinh: "); scanf("%d", &menu);
-	switch (menu)
-	{
-	case 1:
-		printf("a + b = %d \n", a + b);
-		break;
-	case 2:
-		printf("a - b = %d \n", a - b);
-		break;
-	case 3:
-		printf("a * b = %d \n", a * b);
-		break;
-	case 4:
-		b != 0 ?
-			printf("a / b = %.1f \n", a * 1.0 / b)
-			: printf("khong the chia cho 0 \n");
-		break;
-	default:
-		printf("lua chon khong hop le \n");
-		break;
-	}
-
-	/*
-	Bài 7 — In số chẵn
-	Yêu cầu người dùng nhập n và in ra tất cả số chẵn trong khoảng từ 1 đến n
-	Nhập: n
-	In tất cả số chẵn: 1 → n
-	Ví dụ:
-	n = 10
-	*/
-
-	int n = 0;
-	printf("Nhap n: "); scanf("%d", &n);
-
-	for (int i = 2; i <= n; i += 2)
-	{
-		//if (i % 2 == 0) {
-		//}
-			printf("%d ", i);
-	}
-
-	/*
-	Bài 8 — Tổng từ 1 đến n
-	Yêu cầu người dùng nhập n và in ra kết quả là tổng từ 1 đến n
-	Ví dụ: 
-	n = 5
-	Output: 15
-	*/
-
-	int n = 0;
-	printf("Nhap n: "); scanf("%d", &n);
-
-	int tong = 0;
-	for (int i = 1; i <= n;i++)
-	{
-		tong = tong + i;
-	}
-
-	printf("tong tu 1 den %d: %d \n", n, tong);
 }

@@ -23,3 +23,15 @@ char xep_loai(float diem_tb)
 	if (diem_tb >= 5.0) return 'C';
 	return 'F';
 }
+
+int do_dai_chuoi(char* str)
+{
+	int len = 0;
+	while (*str != '\0')
+	{
+		len++;
+		str++;
+	}
+
+	return len;
+}

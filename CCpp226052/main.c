@@ -1,56 +1,86 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include "lib.h"
+#include <string.h>
+#include <ctype.h>
 
-void tang_mot(int* x)
+void in_hoa_chuoi(char* str)
 {
-	// 0x1001 : 0x1000
-	*x = *x + 1;
-	printf("Bien x: %d \n", *x);
+	while (*str != '\0')
+	{
+		*str = toupper(*str);
+		str++;
+	}
 }
 
-void hoan_doi(int* a, int* b)
+int tim_ki_tu(char* str, char c)
 {
-	int temp = *a;
-	*a = *b;
-	*b = temp;
+	int i = 0;
+	
+	while (str[i] != '\0')
+	{
+		if (str[i] == c)
+		{
+			return i;
+		}
+		i++;
+	}
+
+
+	return -1;
 }
 
-void chia_lay_du(int a, int b, int* thuong, int* du)
+void ghep_ho_ten(char* ketqua, char* ho, char* ten)
 {
-	*thuong = a / b;
-	*du = a % b;
+	strcpy(ketqua, ho);
+	strcat(ketqua, " ");
+	strcat(ketqua, ten);
+}
+
+void tim_max_min(int* arr, int len, int* max, int* min)
+{
+	*max = arr[0];
+	*min = arr[0];
+	for (int i = 0; i < len; i++)
+	{
+		if (arr[i] > *max) *max = arr[i];
+		if (arr[i] < *min) *min = arr[i];
+	}
 }
 
 void main()
 {
-	int a = 5; // 0x1000 : 5
-	//tang_mot(a); // truyền tham trị
-	tang_mot(&a); // truyền tham chiếu
-	printf("Bien a: %d \n", a);
+	char s[] = "hello world!";
 
-	int m = 6;
-	int n = 8;
-	hoan_doi(&m, &n);
-	printf("Bien m: %d \n", m);
-	printf("Bien n: %d \n", n);
+	// VD1: viết hàm tính độ dài chuỗi
+	int len = do_dai_chuoi(s); // hàm viết bên lib.h, lib.c
+	printf("do dai chuoi s: %d \n", len);
 
-	int x = 10;
-	int y = 3;
-	int thuong = 0;
-	int du = 0;
+	// VD2: viết hàm đổi trực tiếp cả chuỗi sang chữ in hoa
+	in_hoa_chuoi(s);
+	printf("Chuoi sau khi in hoa: %s \n", s);
 
-	chia_lay_du(x, y, &thuong, &du);
-	printf("%d chia %d bang %d du %d \n", x, y, thuong, du);
+	// VD3: viết hàm tìm vị trí ký tự, nếu không tìm thấy thì trả về -1
+	int vi_tri = tim_ki_tu(s, 'A');
+	printf("ki tu A trong chuoi s tai vi tri: %d \n", vi_tri);
 
-	//in_duong_ke(20);
-	//printf("Bang Diem \n");
-	//in_duong_ke(20);
-	//float diem_tb1 = tinh_diem_tb(8, 7, 7);
-	//printf("Diem trung binh ban 1: %.1f, xep loai: %c \n", diem_tb1, xep_loai(diem_tb1));
-	//float diem_tb2 = tinh_diem_tb(9, 6, 7);
-	//printf("Diem trung binh ban 2: %.1f, xep loai: %c \n", diem_tb2, xep_loai(diem_tb2));
-	//float diem_tb3 = tinh_diem_tb(9, 6, 5);
-	//printf("Diem trung binh ban 3: %.1f, xep loai: %c \n", diem_tb3, xep_loai(diem_tb3));
+	// VD4: viết hàm ghép họ tên ghi kết quả vào con trỏ truyền vào tham số
 
+	char ho[] = "Nguyen";
+	char ten[] = "An";
+	char ketqua[50] = { 0 };
+
+	ghep_ho_ten(ketqua, ho, ten); // ghi vào ketqua = "Nguyen An"
+	printf("ho ten sau khi ghep: %s \n", ketqua);
+
+
+	//3. Tìm giá trị lớn nhất và nhỏ nhất: 
+	// Viết hàm tìm giá trị lớn nhất và nhỏ nhất trong mảng,
+	// trả kết quả thông qua tham số con trỏ.
+
+	int arr[] = { 34,23,41,27,13,20,36 };
+	int max = 0;
+	int min = 0;
+	tim_max_min(arr, 7, &max, &min);
+	printf("Max: %d, Min: %d \n", max, min);
 }
